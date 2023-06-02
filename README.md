@@ -30,7 +30,23 @@ git clone https://github.com/Mainman002/ChatGPT_SDL2.git
 ```
 Then open a terminal in the downloaded folder and run this to build the app
 ```
-make
+make macos
+```
+```
+make windows
+```
+```
+make linux
+```
+You can run the app by running 1 of these commands
+```
+make run-macos
+```
+```
+make run-windows
+```
+```
+make run-linux
 ```
 You can also clean the project with this command
 ```
