@@ -6,7 +6,7 @@ An SDL2 project generated mostly by ChatGPT (guided a lot by me fixing things th
 * sdl2
 * sdl2_image
 
-![SDL_ChatGPT_Window](https://github.com/Mainman002/ChatGPT_SDL2/assets/11281480/d5e1f67a-4c53-4ba2-9409-9c2716c9276c)
+![Screenshot 2023-06-02 at 7 45 20 PM](https://github.com/Mainman002/ChatGPT_SDL2/assets/11281480/8f89013b-ed68-47e5-80e1-0d4d41de9a55)
 
 If you're on macos then you can install using brew
 ```
