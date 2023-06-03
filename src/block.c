@@ -8,7 +8,7 @@ SDL_Color colorList[] = {
     (SDL_Color){0, 255, 0, 255}
 };
 
-Block* Block_Create(int x, int y, int width, int height, int health, int idx) {
+Block* Block_Create(int x, int y, int width, int height, int health, int idx, SDL_Texture* texture) {
     Block* block = (Block*)malloc(sizeof(Block));
     if (block != NULL) {
         block->rect.x = x;
@@ -17,6 +17,7 @@ Block* Block_Create(int x, int y, int width, int height, int health, int idx) {
         block->rect.h = height;
         block->health = health;
         block->color = colorList[health-1];
+        block->texture = texture;
     }
     return block;
 }
@@ -27,8 +28,16 @@ void Block_Destroy(Block* block) {
 }
 
 void Block_Render(Block* block, SDL_Renderer* renderer) {
-    SDL_SetRenderDrawColor(renderer, block->color.r, block->color.g, block->color.b, block->color.a);
-    SDL_RenderFillRect(renderer, &(block->rect));
+    SDL_Rect destRect = {
+        (int)block->rect.x,
+        (int)block->rect.y,
+        (int)block->rect.w,
+        (int)block->rect.h
+    };
+
+    // SDL_SetRenderDrawColor(renderer, block->color.r, block->color.g, block->color.b, block->color.a);
+    // SDL_RenderFillRect(renderer, &(block->rect));
+    SDL_RenderCopyEx(renderer, block->texture, NULL, &destRect, 0, 0, SDL_FLIP_NONE);
 }
 
 bool Block_CollideWithBall(Block* block, Ball* ball) {

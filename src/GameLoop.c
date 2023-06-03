@@ -27,6 +27,26 @@ bool GameLoop(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int w
         return false;
     }
 
+    SDL_Texture* paddleTexture_Red = AssetManager_LoadTexture(renderer, "src/img/Paddle_Red.png");
+    if (paddleTexture_Red == NULL) {
+        printf("Failed to load paddleTexture_Red texture!\n");
+        return false;
+    }
+
+    SDL_Texture* paddleTexture_Yellow = AssetManager_LoadTexture(renderer, "src/img/Paddle_Yellow.png");
+    if (paddleTexture_Yellow == NULL) {
+        printf("Failed to load paddleTexture_Yellow texture!\n");
+        return false;
+    }
+
+    // Images in project
+    SDL_Texture* imgList[] = {
+        ballTexture,
+        paddleTexture_Red,
+        paddleTexture_Yellow,
+        paddleTexture
+    };
+
     // Create ball and paddle
     Ball ball;
     Ball_Init(&ball, windowWidth * 0.5, windowHeight * 0.5, 14, 70, 24, ballTexture);
@@ -49,7 +69,7 @@ bool GameLoop(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int w
                        col * (blockWidth + blockSpacing);
             int yPos = 100 + row * (blockHeight + blockSpacing);
 
-            blocks[row][col] = Block_Create(xPos, yPos, blockWidth, blockHeight, 3, 0);
+            blocks[row][col] = Block_Create(xPos, yPos, blockWidth, blockHeight, 3, 0, paddleTexture);
             if (blocks[row][col] == NULL) {
                 printf("Failed to create block.\n");
                 return false;
@@ -92,6 +112,7 @@ bool GameLoop(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int w
                 Block* block = blocks[row][col];
 
                 if (block != NULL && block->health > 0) {
+                    block->texture = imgList[block->health];
                     Block_Render(block, renderer);
 
                     // Check if the ball collides with the block

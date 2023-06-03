@@ -11,9 +11,10 @@ typedef struct Block {
     SDL_Rect rect;
     int health;
     SDL_Color color;
+    SDL_Texture* texture;
 } Block;
 
-Block* Block_Create(int x, int y, int width, int height, int health, int idx);
+Block* Block_Create(int x, int y, int width, int height, int health, int idx, SDL_Texture* texture);
 void Block_Destroy(Block* block);
 void Block_Render(Block* block, SDL_Renderer* renderer);
 bool Block_CollideWithBall(Block* block, Ball* ball);

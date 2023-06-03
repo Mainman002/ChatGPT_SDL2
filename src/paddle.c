@@ -1,3 +1,4 @@
+// paddle.c
 #include "ball.h"
 #include "paddle.h"
 #include "Input.h"
@@ -6,15 +7,14 @@
 
 #define PADDLE_WIDTH 128
 #define PADDLE_HEIGHT 24
-#define PADDLE_ROTATION_LIMIT 10
-// #define PADDLE_MOVEMENT_SPEED 200
+#define PADDLE_ROTATION_LIMIT 20
 
 void Paddle_Init(Paddle* paddle, float x, float y, int width, int height, float top_speed, SDL_Texture* texture) {
     paddle->x = x;
     paddle->y = y;
     paddle->rect.w = width;
     paddle->rect.h = height;
-    paddle->top_speed = top_speed*10;
+    paddle->top_speed = top_speed * 10;
     paddle->velocity = 0;
     paddle->rotation = 0;
     paddle->texture = texture;
@@ -44,6 +44,25 @@ void Paddle_Update(Paddle* paddle, float deltaTime, int mouseX, int windowWidth)
             paddle->x = targetX;
         }
     }
+
+    // Calculate the rotation based on the paddle's position relative to the target position
+    // float targetRotation = (paddle->x - targetX) / (windowWidth - PADDLE_WIDTH) * PADDLE_ROTATION_LIMIT;
+    float targetRotation = -(paddle->x - targetX) / (windowWidth - PADDLE_WIDTH) * PADDLE_ROTATION_LIMIT;
+
+    float rotationSpeed = 400.0f * deltaTime; // Adjust the rotation speed as desired
+
+    // Adjust the current rotation towards the target rotation
+    if (paddle->rotation < targetRotation) {
+        paddle->rotation += rotationSpeed;
+        if (paddle->rotation > targetRotation) {
+            paddle->rotation = targetRotation;
+        }
+    } else if (paddle->rotation > targetRotation) {
+        paddle->rotation -= rotationSpeed;
+        if (paddle->rotation < targetRotation) {
+            paddle->rotation = targetRotation;
+        }
+    }
 }
 
 void Paddle_Render(Paddle* paddle, SDL_Renderer* renderer) {
@@ -54,8 +73,19 @@ void Paddle_Render(Paddle* paddle, SDL_Renderer* renderer) {
         PADDLE_HEIGHT
     };
 
-    SDL_RenderCopyEx(renderer, paddle->texture, NULL, &destRect, paddle->rotation, NULL, SDL_FLIP_NONE);
+    // Calculate the rotation center
+    int centerX = PADDLE_WIDTH / 2;
+    int centerY = PADDLE_HEIGHT / 2;
+
+    // Set the rendering pivot point
+    SDL_Point pivot = { centerX, centerY };
+
+    // Render the rotated paddle
+    SDL_RenderCopyEx(renderer, paddle->texture, NULL, &destRect, paddle->rotation, &pivot, SDL_FLIP_NONE);
 }
+
+
+
 
 bool Paddle_CollideWithBall(Paddle* paddle, Ball* ball) {
     // Calculate the distance between the centers of the ball and the block
