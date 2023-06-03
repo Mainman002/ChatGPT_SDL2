@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -v -Wall -Wextra -std=c99 -I./include
+CFLAGS = -v -Wall -Wextra -std=c99 -Os -fdata-sections -ffunction-sections -I./include
 LIBS = -lSDL2 -lSDL2_image
 
 SRCDIR = src

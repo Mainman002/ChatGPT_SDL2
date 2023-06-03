@@ -60,3 +60,19 @@ void Ball_CollideWithWindow(Ball* ball, int windowWidth, int windowHeight) {
     }
 }
 
+void Ball_Bounce(Ball* ball, float normalX, float normalY) {
+    // Calculate the dot product of the ball's velocity and the collision normal
+    float dotProduct = ball->velocityX * normalX + ball->velocityY * normalY;
+
+    // Calculate the new velocity components after the bounce
+    float bounceVelocityX = ball->velocityX - 2.0f * dotProduct * normalX;
+    float bounceVelocityY = ball->velocityY - 2.0f * dotProduct * normalY;
+
+    // Update the ball's velocity
+    Ball_SetVelocity(ball, bounceVelocityX, bounceVelocityY);
+}
+
+void Ball_SetVelocity(Ball* ball, float velocityX, float velocityY) {
+    ball->velocityX = velocityX;
+    ball->velocityY = velocityY;
+}

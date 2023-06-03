@@ -22,7 +22,10 @@ void Ball_Init(Ball* ball, float x, float y, float speed, float rotationSpeed, i
 void Ball_Update(Ball* ball, float deltaTime, int windowWidth, int windowHeight);
 void Ball_Render(Ball* ball, SDL_Renderer* renderer);
 void Ball_CollideWithWindow(Ball* ball, int windowWidth, int windowHeight);
+void Ball_Bounce(Ball* ball, float normalX, float normalY);
+void Ball_SetVelocity(Ball* ball, float bounceVelocityX, float bounceVelocityY);
 void Ball_Cleanup(Ball* ball);
+
 
 
 #endif
