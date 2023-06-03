@@ -52,3 +52,5 @@ You can also clean the project with this command
 ```
 make clean
 ```
+If you're curious about the full process I took to make this project, here's a link to my 
+[ChatGPT Conversation](https://chat.openai.com/share/e19d7480-308a-49b0-9090-b5378ae8ce6c)
