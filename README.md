@@ -5,8 +5,8 @@ An SDL2 project generated mostly by ChatGPT (guided a lot by me fixing things th
 * gcc
 * sdl2
 * sdl2_image
-
-![Screenshot 2023-06-02 at 7 45 20 PM](https://github.com/Mainman002/ChatGPT_SDL2/assets/11281480/8f89013b-ed68-47e5-80e1-0d4d41de9a55)
+* 
+![Screenshot 2023-06-02 at 8 43 31 PM](https://github.com/Mainman002/ChatGPT_SDL2/assets/11281480/b06565df-7345-4316-aa69-1c91b5b23a81)
 
 If you're on macos then you can install using brew
 ```
